@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>التطبيق</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:#f6f1e6;--bg2:#eadfc6;--glass:#ffffffb8;--tx:#1c1913;--mut:#8b8170;--line:#0000000f;--gold:#b98a2c;--gold2:#ecd17f;--ok:#1f9d55;--bad:#d64545;--blue:#2b6fe0;--o1:#f3d98a99;--o2:#e9b9a099;--sh:0 14px 36px #5a461424;
+--f:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","SF Arabic","Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08080a;--bg2:#15110a;--glass:#1b1a20a8;--tx:#f6f1e4;--mut:#9d9582;--line:#ffffff14;--gold:#dcb65e;--gold2:#f8e7ac;--o1:#b98a2c88;--o2:#4a2f8a77;--sh:0 16px 40px #000b}}
+:root[data-theme="dark"]{--bg:#08080a;--bg2:#15110a;--glass:#1b1a20a8;--tx:#f6f1e4;--mut:#9d9582;--line:#ffffff14;--gold:#dcb65e;--gold2:#f8e7ac;--o1:#b98a2c88;--o2:#4a2f8a77;--sh:0 16px 40px #000b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:var(--f);color:var(--tx);background:var(--bg);padding:14px 16px 118px;-webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;width:360px;height:360px;border-radius:50%;filter:blur(80px);animation:fl 13s ease-in-out infinite alternate}
+body:before{top:-100px;right:-110px;background:var(--o1)}body:after{bottom:-120px;left:-120px;background:var(--o2);animation-delay:-6s}
+@keyframes fl{to{transform:translate(-50px,70px) scale(1.25)}}
+h1{font-size:34px;font-weight:800;letter-spacing:-.6px;margin:8px 4px 18px;background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gl{background:var(--glass);backdrop-filter:blur(26px) saturate(160%);-webkit-backdrop-filter:blur(26px) saturate(160%);border:1px solid var(--line);border-radius:24px;box-shadow:var(--sh),inset 0 1px 0 #ffffff22;padding:18px;margin-bottom:14px}
+.mut{color:var(--mut);font-size:13px}.c{text-align:center}.ltr{direction:ltr;unicode-bidi:plaintext}
+.hero{text-align:center;padding:6px 0 20px}
+.ring{width:124px;height:124px;border-radius:50%;margin:0 auto 14px;padding:4px;background:conic-gradient(from 0deg,var(--gold2),var(--gold),#fff8,var(--gold2));box-shadow:0 0 0 6px #b98a2c1a,0 14px 40px #b98a2c66;animation:spin 8s linear infinite}
+.ring>*{animation:spin 8s linear infinite reverse}@keyframes spin{to{transform:rotate(360deg)}}
+.av{width:100%;height:100%;border-radius:50%;object-fit:cover;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:700;color:var(--gold);border:4px solid var(--bg)}
+.nm{font-size:26px;font-weight:800;letter-spacing:-.4px}
+.pill{display:inline-block;margin-top:10px;padding:6px 15px;border-radius:99px;font-size:12px;font-weight:700;backdrop-filter:blur(10px)}
+.on{background:#1f9d5524;color:var(--ok);box-shadow:0 0 18px #1f9d5533}.off{background:#d6454524;color:var(--bad)}
+.tilt{transition:transform .25s ease;transform-style:preserve-3d;will-change:transform}
+.idc,.bank{position:relative;overflow:hidden;border-radius:28px;padding:22px;margin-bottom:16px}
+.idc:before,.bank:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,#ffffff70 50%,transparent 65%);transform:translateX(-130%);animation:sw 5s ease-in-out infinite;pointer-events:none}
+@keyframes sw{60%,100%{transform:translateX(130%)}}
+.idc{color:#2a210c;background:linear-gradient(135deg,#fbefc0,#e2bd62 45%,#b98a2c);box-shadow:0 22px 50px #b98a2c66,inset 0 1px 0 #fff9}
+.idc .t{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:3px;font-weight:800;opacity:.7}
+.chip{width:42px;height:31px;border-radius:8px;background:linear-gradient(135deg,#fff9,#0002);border:1px solid #0003}
+.idc .g{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px;position:relative}
+.idc small{display:block;font-size:11px;opacity:.65;margin-bottom:3px}.idc b{font-size:16px;font-weight:700}.idc .w{grid-column:1/3}
+.bank{color:#f6f1e4;background:radial-gradient(120% 90% at 100% 0,#3a2f14,transparent 60%),linear-gradient(135deg,#26262d,#0b0b0e 65%);border:1px solid #dcb65e55;box-shadow:0 24px 54px #000a,inset 0 1px 0 #ffffff22}
+.bank .n{direction:ltr;font-size:23px;letter-spacing:3px;margin:28px 0 22px;text-align:center;font-variant-numeric:tabular-nums;text-shadow:0 2px 10px #000}
+.bank .bal{font-size:38px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#f8e7ac,#dcb65e);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bank .r{display:flex;justify-content:space-between;align-items:flex-end}
+.row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.row b{font-weight:600;max-width:62%;text-align:left}
+.btn{display:block;width:100%;border:0;border-radius:18px;padding:17px;font:700 17px var(--f);color:#fff;margin-top:12px;position:relative;overflow:hidden;box-shadow:0 10px 24px #0003,inset 0 1px 0 #ffffff55;transition:transform .15s,filter .15s}
+.btn:active{transform:scale(.96);filter:brightness(1.1)}
+.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2a210c}
+.green{background:linear-gradient(135deg,#34c27a,#1b8f4f)}.red{background:linear-gradient(135deg,#f06464,#c53030)}.blue{background:linear-gradient(135deg,#4f8ef7,#2557c9)}
+.plans{display:grid;gap:12px;margin-bottom:6px}
+.tile{display:flex;justify-content:space-between;align-items:center;padding:18px;border-radius:24px;background:var(--glass);border:1px solid var(--line);box-shadow:var(--sh);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);animation:up .5s both}
+.tile:nth-child(2){animation-delay:.08s;border-color:var(--gold)}.tile:nth-child(3){animation-delay:.16s}
+.tile .d{font-size:22px;font-weight:800}.tile .pr{display:flex;align-items:center;gap:12px}
+.tile .p{font-size:26px;font-weight:800;color:var(--gold)}.tile .btn{width:auto;margin:0;padding:11px 22px;font-size:15px}
+input{width:100%;padding:17px;border-radius:16px;border:1px solid var(--line);background:var(--glass);color:var(--tx);font:600 17px var(--f);text-align:center;direction:ltr;outline:0;transition:.2s}
+input:focus{border-color:var(--gold);box-shadow:0 0 0 4px #b98a2c25}
+nav{position:fixed;left:14px;right:14px;bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;padding:8px;border-radius:30px;background:var(--glass);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);border:1px solid var(--line);box-shadow:var(--sh)}
+nav div{flex:1;text-align:center;font-size:11px;font-weight:700;color:var(--mut);padding:8px 2px;border-radius:22px;transition:.25s}
+nav div span{display:block;font-size:22px;margin-bottom:1px;transition:.25s}
+nav .a{color:var(--gold);background:linear-gradient(180deg,#b98a2c2b,#b98a2c10);box-shadow:inset 0 0 0 1px #b98a2c44}nav .a span{transform:translateY(-2px) scale(1.15)}
+#toast{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translate(-50%,-100px);background:var(--tx);color:var(--bg);padding:12px 22px;border-radius:99px;font-size:14px;font-weight:700;transition:.35s cubic-bezier(.2,1.2,.4,1);z-index:9;box-shadow:var(--sh)}
+#toast.s{transform:translate(-50%,0)}
+.v{animation:up .45s both}@keyframes up{from{opacity:0;transform:translateY(14px)}}
+</style>
+</head>
+<body>
+<div id="toast"></div>
+<div id="app"></div>
+<nav id="nav"></nav>
+<script>
+const tg=(window.Telegram&&window.Telegram.WebApp)||{};
+tg.ready&&tg.ready();tg.expand&&tg.expand();
+if(tg.colorScheme)document.documentElement.dataset.theme=tg.colorScheme;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>\"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+const fmt=c=>esc(String(c).replace(/(.{4})/g,"$1 ").trim());
+const hap=()=>tg.HapticFeedback&&tg.HapticFeedback.impactOccurred("light");
+function load(){try{const s=new URLSearchParams(location.search).get("d");if(!s)return null;
+const b=atob(s.replace(/-/g,"+").replace(/_/g,"/"));const o=JSON.parse(new TextDecoder().decode(Uint8Array.from(b,c=>c.charCodeAt(0))));
+if(typeof o.n!=="string"||!o.p||typeof o.p!=="object")return null;
+o.id=Number(o.id)||0;o.b=Number(o.b)||0;o.a=o.a===true;o.c=String(o.c||"");o.dev=String(o.dev||"").replace(/[^A-Za-z0-9_]/g,"");
+o.p=Object.fromEntries(Object.entries(o.p).map(([k,v])=>[Number(k),Number(v)]).filter(([k,v])=>k>0&&k<=3650&&v>=0));
+return o}catch(e){return null}}
+let D=load();const demo=!D;
+if(demo)D={id:7012345678,n:"أحمد علي",u:"ahmed",c:"4829165037410286",b:2,a:false,s:"",g:"",ch:"",p:{7:2,15:5,30:10},dev:"telegram"};
+let tab="id",open=false;
+function toast(t){const e=$("#toast");e.textContent=t;e.className="s";setTimeout(()=>e.className="",2200)}
+function send(o){hap();if(demo||!tg.sendData){toast("معاينة فقط — يعمل داخل تيليجرام");return}try{tg.sendData(JSON.stringify(o))}catch(e){toast("افتح التطبيق من زر البوت أسفل المحادثة")}}
+function pill(){return D.a?`<span class="pill on">مشترك حتى ${esc(D.s)}</span>`:`<span class="pill off">غير مشترك</span>`}
+function avatar(){const ph=tg.initDataUnsafe&&tg.initDataUnsafe.user&&tg.initDataUnsafe.user.photo_url||(D.u?`https://t.me/i/userpic/320/${encodeURIComponent(D.u)}.jpg`:"");
+const f=`<div class="av">${esc((D.n||"?")[0])}</div>`;
+return ph?`<img class="av" src="${esc(ph)}" onerror="this.outerHTML=this.dataset.f" data-f='${f}'>`:f}
+const V={
+id:()=>`<h1>الهوية</h1><div class="hero"><div class="ring">${avatar()}</div><div class="nm">${esc(D.n)}</div><div class="mut ltr">${D.u?"@"+esc(D.u):"—"}</div>${pill()}</div>
+<div class="idc tilt"><div class="t"><span>IDENTITY CARD</span><i class="chip"></i></div>
+<div class="g"><div class="w"><small>الاسم</small><b>${esc(D.n)}</b></div><div><small>اسم المستخدم</small><b class="ltr">${D.u?"@"+esc(D.u):"—"}</b></div><div><small>الايدي</small><b class="ltr">${D.id}</b></div><div class="w"><small>رقم البطاقة</small><b class="ltr">${fmt(D.c)}</b></div></div></div>
+<button class="btn gold" onclick="cp()">نسخ رقم البطاقة</button><button class="btn blue" onclick="dev()">مراسلة المطور</button>`,
+card:()=>!open?`<h1>البطاقة</h1><div class="gl"><div class="c" style="font-size:44px">🔐</div><p class="c mut">أدخل رقم بطاقتك للدخول إلى بطاقتك البنكية</p>
+<input id="cn" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000"><button class="btn gold" onclick="unlock()">دخول</button></div>`
+:`<h1>البطاقة</h1><div class="bank tilt"><div class="mut" style="color:#9a927f;letter-spacing:2px;font-size:11px">PREMIUM CARD</div><div class="n">${fmt(D.c)}</div>
+<div class="r"><div><div class="mut" style="color:#9a927f">الرصيد</div><div class="bal">${D.b}$</div></div><div style="font-weight:600">${esc(D.n)}</div></div></div>
+<button class="btn green" onclick="go('plans')">اشتراك</button><button class="btn red" onclick="dev()">شحن البطاقة</button>`,
+plans:()=>`<h1>الاشتراك</h1><div class="gl"><div class="row"><span class="mut">رصيدك</span><b>${D.b}$</b></div><div class="row"><span class="mut">الحالة</span>${pill()}</div></div>
+<div class="plans">${Object.entries(D.p).map(([d,p])=>`<div class="tile"><div><div class="d">${d} يوم</div><div class="mut">≈ ${(p/d).toFixed(2)}$ / يوم</div></div><div class="pr"><span class="p">${p}$</span><button class="btn green" onclick="buy(${d},${p})">اشترك</button></div></div>`).join("")}</div>
+<button class="btn red" onclick="dev()">شحن البطاقة</button>`,
+mon:()=>!D.a?`<h1>المراقبة</h1><div class="gl c"><div style="font-size:44px">🔒</div><p class="mut">المراقبة للمشتركين فقط</p><button class="btn green" onclick="go('plans')">اشتراك</button></div>`
+:`<h1>المراقبة</h1><div class="gl"><div class="row"><span class="mut">المجموعة</span><b>${esc(D.g)||"—"}</b></div><div class="row"><span class="mut">الإشعارات</span><b>${esc(D.ch)||"—"}</b></div></div>
+<div class="gl"><input id="g" placeholder="رابط أو يوزر المجموعة"><button class="btn blue" onclick="link('group','g')">تعيين المجموعة</button></div>
+<div class="gl"><input id="c" placeholder="رابط أو يوزر قناة الإشعارات"><button class="btn blue" onclick="link('channel','c')">تعيين قناة الإشعارات</button><p class="mut c">أضف البوت مشرفاً في القناة أولاً</p></div>
+<button class="btn red" onclick="send({a:'stop'})">إيقاف المراقبة</button>`};
+const T=[["id","🪪","الهوية"],["card","💳","البطاقة"],["plans","🛒","الاشتراك"],["mon","📡","المراقبة"]];
+function render(){$("#nav").innerHTML=T.map(([k,i,t])=>`<div class="${k==tab?"a":""}" onclick="go('${k}')"><span>${i}</span>${t}</div>`).join("");
+$("#app").innerHTML=`<div class="v">${V[tab]()}</div>`;fx()}
+function fx(){document.querySelectorAll(".tilt").forEach(e=>{e.onpointermove=ev=>{const r=e.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width-.5,y=(ev.clientY-r.top)/r.height-.5;e.style.transform=`perspective(700px) rotateY(${x*16}deg) rotateX(${ -y*16}deg)`};e.onpointerleave=()=>e.style.transform=""});
+const b=document.querySelector(".bal");if(b){const t=D.b,t0=performance.now();(function f(n){const k=Math.min(1,(n-t0)/900);b.textContent=(t*(1-Math.pow(1-k,3))).toFixed(2)+"$";k<1&&requestAnimationFrame(f)})(t0)} }
+function go(t){hap();tab=t;render();scrollTo(0,0)}
+function dev(){const u="https://t.me/"+encodeURIComponent(D.dev);tg.openTelegramLink?tg.openTelegramLink(u):open_(u)}
+function open_(u){window.open(u,"_blank")}
+function cp(){navigator.clipboard&&navigator.clipboard.writeText(D.c);toast("تم نسخ رقم البطاقة")}
+function unlock(){if($("#cn").value.replace(/\s/g,"")===String(D.c)){open=true;hap();render()}else toast("رقم البطاقة غير صحيح")}
+function buy(d,p){const run=()=>send({a:"buy",days:d});
+tg.showConfirm?tg.showConfirm(`تفعيل ${d} يوم بـ ${p}$ ؟`,ok=>ok&&run()):(confirm(`تفعيل ${d} يوم بـ ${p}$ ؟`)&&run())}
+function link(a,id){const v=$("#"+id).value.trim();if(!v)return toast("أدخل الرابط");send({a,link:v})}
+if(demo)setTimeout(()=>toast("وضع المعاينة"),400);
+render();
+</script>
+</body>
+</html>
